@@ -45,66 +45,56 @@ public class AppHooksManager{
         guard let application = mainProtocolClass else{return}
         do {
             var methodCount : UInt32 = 1
-            if let methodList = protocol_copyMethodDescriptionList(UIApplicationDelegate.self,
-                                                                   false, true,  UnsafeMutablePointer<UInt32>(&methodCount)) {
+            guard let methodList = protocol_copyMethodDescriptionList(UIApplicationDelegate.self,
+                                                                      false, true,  UnsafeMutablePointer<UInt32>(&methodCount)) else{return}
                 
                 
-                //奇怪了 这里获取的方法竟然会重复
-                var methods = [objc_method_description]()
-                for i in 0..<Int(methodCount) {
-                    let methodDesc = methodList[i];
-                    methods.append(methodDesc)
-                }
-                let set = Set<objc_method_description>.init(methods)
-                for methodDesc in set {
-                    guard let name = methodDesc.name else {continue}
-                    print("\n\n\n>>>>>>\(name)")
-                    let wrappedBlock:@convention(block) (AspectInfo)-> Void = {aspectInfo in
-                        if let hooks = self.hooksDic[name]{
-                            for hook in hooks{
-                                if class_getInstanceMethod(hook.classForCoder, name) != nil{
-                                    hook.perform(name, with: aspectInfo.arguments().filter({!($0 is NSNull)}))
-                                }
-                            }
-                        }
-                    }
-                    //如果主工程的delegate实现了方法，则所有的hook都需要执行
-                    if class_getInstanceMethod(application, name) != nil{
-                        print("---主工程实现了")
-                        self.hooksDic[name] = self.hooks.filter({ (hook) -> Bool in
-                            let isIMP = (class_getInstanceMethod(hook.classForCoder, name) != nil)
-                            print("---\(hook.classForCoder) 实现了")
-                            return isIMP
-                        })
-                        _ = try application.aspect_hook(name, with: AspectOptions.positionBefore, usingBlock: wrappedBlock)
-                    }else{
-                        //如果主工程的delegate没有实现方法
-                        //找到实现了的hook
-                        print("---主工程没有实现")
-                        var hooks = [ApplicationHook]()
-                        for hook in self.hooks{
+            //奇怪了 这里获取的方法竟然会重复
+            var methods = [objc_method_description]()
+            for i in 0..<Int(methodCount) {
+                let methodDesc = methodList[i];
+                methods.append(methodDesc)
+            }
+            let set = Set<objc_method_description>.init(methods)
+            for methodDesc in set {
+                guard let name = methodDesc.name else {continue}
+                let wrappedBlock:@convention(block) (AspectInfo)-> Void = {aspectInfo in
+                    if let hooks = self.hooksDic[name]{
+                        for hook in hooks{
                             if class_getInstanceMethod(hook.classForCoder, name) != nil{
-                                print("---\(hook.classForCoder) 实现了")
-                                hooks.append(hook)
-                            }
-                        }
-                        if hooks.count > 0{
-                            //取出最后一个hook 动态添加到AppDelegate（因为我们等会hook的是before，为保证level，这里hook最后一个）
-                            let hook = hooks.removeLast()
-                            if let method = class_getInstanceMethod(hook.classForCoder, name){
-                                print("---\(hook.classForCoder) 实现的方法动态添加到主工程")
-                                class_addMethod(application, name, method_getImplementation(method), method_getTypeEncoding(method))
-                            }
-                            
-                            if hooks.count > 0{
-                                self.hooksDic[name] = hooks
-                                _ = try application.aspect_hook(name, with: AspectOptions.positionBefore, usingBlock: wrappedBlock)
+                                hook.perform(name, with: aspectInfo.arguments().filter({!($0 is NSNull)}))
                             }
                         }
                     }
-                    
                 }
-                
+                //如果主工程的delegate实现了方法，则所有的hook都需要执行
+                if class_getInstanceMethod(application, name) != nil{
+                    self.hooksDic[name] = self.hooks.filter({ (hook) -> Bool in
+                        return class_getInstanceMethod(hook.classForCoder, name) != nil
+                    })
+                    _ = try application.aspect_hook(name, with: AspectOptions.positionBefore, usingBlock: wrappedBlock)
+                }else{
+                    //如果主工程的delegate没有实现方法
+                    //找到实现了的hook
+                    var hooks = [ApplicationHook]()
+                    for hook in self.hooks{
+                        if class_getInstanceMethod(hook.classForCoder, name) != nil{
+                            hooks.append(hook)
+                        }
+                    }
+                    if hooks.count > 0{
+                        //取出最后一个hook 动态添加到AppDelegate（因为我们等会hook的是before，为保证level，这里hook最后一个）
+                        let hook = hooks.removeLast()
+                        if let method = class_getInstanceMethod(hook.classForCoder, name){
+                            class_addMethod(application, name, method_getImplementation(method), method_getTypeEncoding(method))
+                        }
+                        
+                        if hooks.count > 0{
+                            self.hooksDic[name] = hooks
+                            _ = try application.aspect_hook(name, with: AspectOptions.positionBefore, usingBlock: wrappedBlock)
+                        }
+                    }
+                }
             }
             
         } catch  {
