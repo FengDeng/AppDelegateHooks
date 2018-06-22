@@ -16,9 +16,8 @@ extension UIApplication{
         AppHooksManager.default.hook()
     }()
     
-    open override var next: UIResponder?{
+    @objc class func registAllApplicationHookFromOCload(){
         UIApplication.registAllApplicationHook
-        return super.next
     }
 }
 
@@ -33,19 +32,31 @@ public class AppHooksManager{
         self.hooks.append(hook)
         self.hooks.sort()
     }
+    
+    //主工程 实现Delegate的类 一般为 AppDelegate
+    var mainProtocolClass : AnyClass?
 
     //如果hook的方法需要有返回值的话，查看 https://github.com/steipete/Aspects
     private init(){
     }
     
     func hook(){
-        guard let delegate = UIApplication.shared.delegate,let application = delegate as? NSObject else{return}
+        
+        guard let application = mainProtocolClass else{return}
         do {
             var methodCount : UInt32 = 1
             if let methodList = protocol_copyMethodDescriptionList(UIApplicationDelegate.self,
                                                                    false, true,  UnsafeMutablePointer<UInt32>(&methodCount)) {
+                
+                
+                //奇怪了 这里获取的方法竟然会重复
+                var methods = [objc_method_description]()
                 for i in 0..<Int(methodCount) {
                     let methodDesc = methodList[i];
+                    methods.append(methodDesc)
+                }
+                let set = Set<objc_method_description>.init(methods)
+                for methodDesc in set {
                     guard let name = methodDesc.name else {continue}
                     print("\n\n\n>>>>>>\(name)")
                     let wrappedBlock:@convention(block) (AspectInfo)-> Void = {aspectInfo in
@@ -58,14 +69,14 @@ public class AppHooksManager{
                         }
                     }
                     //如果主工程的delegate实现了方法，则所有的hook都需要执行
-                    if class_getInstanceMethod(application.classForCoder, name) != nil{
+                    if class_getInstanceMethod(application, name) != nil{
                         print("---主工程实现了")
                         self.hooksDic[name] = self.hooks.filter({ (hook) -> Bool in
                             let isIMP = (class_getInstanceMethod(hook.classForCoder, name) != nil)
                             print("---\(hook.classForCoder) 实现了")
                             return isIMP
                         })
-                        try application.aspect_hook(name, with: AspectOptions.positionBefore, usingBlock: wrappedBlock)
+                        _ = try application.aspect_hook(name, with: AspectOptions.positionBefore, usingBlock: wrappedBlock)
                     }else{
                         //如果主工程的delegate没有实现方法
                         //找到实现了的hook
@@ -82,18 +93,13 @@ public class AppHooksManager{
                             let hook = hooks.removeLast()
                             if let method = class_getInstanceMethod(hook.classForCoder, name){
                                 print("---\(hook.classForCoder) 实现的方法动态添加到主工程")
-                                class_addMethod(application.classForCoder, name, method_getImplementation(method), method_getTypeEncoding(method))
+                                class_addMethod(application, name, method_getImplementation(method), method_getTypeEncoding(method))
                             }
                             
                             if hooks.count > 0{
                                 self.hooksDic[name] = hooks
-                                try application.aspect_hook(name, with: AspectOptions.positionBefore, usingBlock: wrappedBlock)
+                                _ = try application.aspect_hook(name, with: AspectOptions.positionBefore, usingBlock: wrappedBlock)
                             }
-//                            print(application.classForCoder.instancesRespond(to: name))
-//                            print((application as? UIApplicationDelegate)?.responds(to: name))
-//                            print(application.responds(to: name))
-//                            print("手动调用下 \(name)")
-//                            application.perform(name, with: nil)
                         }
                     }
                     
@@ -169,13 +175,81 @@ extension AppHooksManager{
         return result
     }
     
+    static func confirm(_ baseclass: AnyClass,confirm baseprotocol: Protocol) ->Bool{
+        
+        var eachSubclass: AnyClass = baseclass
+        if class_conformsToProtocol(baseclass, baseprotocol) {
+            return true
+        }
+        while let eachSuperclass: AnyClass = class_getSuperclass(eachSubclass) {
+            /* Use ObjectIdentifier instead of `===` to make identity test.
+             Because some types cannot respond to `===`, like WKObject in WebKit framework. */
+            if class_conformsToProtocol(eachSuperclass, baseprotocol) {
+                return true
+            }
+            eachSubclass = eachSuperclass
+        }
+        
+        return false
+    }
+    
+    static func subclasses(_ baseclass: AnyClass,confirm baseprotocol: Protocol) -> ([AnyClass],[AnyClass]) {
+        var subResult = [AnyClass]()
+        var proResult = [AnyClass]()
+        
+        let count: Int32 = objc_getClassList(nil, 0)
+        
+        guard count > 0 else {
+            return (subResult,proResult)
+        }
+        
+        let classes = UnsafeMutablePointer<AnyClass>.allocate(
+            capacity: Int(count)
+        )
+        
+        defer {
+            classes.deallocate()
+        }
+        
+        let buffer = AutoreleasingUnsafeMutablePointer<AnyClass>(classes)
+        for i in 0..<Int(objc_getClassList(buffer, count)) {
+            let someclass: AnyClass = classes[i]
+            if isSubclass(someclass, superclass: baseclass) {
+                subResult.append(someclass)
+            }else{
+                if confirm(someclass, confirm: baseprotocol) {
+                    proResult.append(someclass)
+                }
+            }
+        }
+        return (subResult,proResult)
+    }
+    
+    
     static func registAllApplicationHook() {
-        let subClasses = AppHooksManager.subclasses(ApplicationHook.self)
-        for subclass in subClasses{
+        
+        let classes = AppHooksManager.subclasses(ApplicationHook.self, confirm: UIApplicationDelegate.self)
+        for subclass in classes.0{
             if let hook = subclass as? ApplicationHook.Type{
                 let instance = hook.init()
                 AppHooksManager.default.regist(hook: instance)
             }
         }
+        for subclass in classes.1{
+            if NSStringFromClass(subclass).contains("Delegate"){
+                AppHooksManager.default.mainProtocolClass = subclass
+            }
+        }
+        
+    }
+}
+
+extension objc_method_description : Equatable,Hashable{
+    public var hashValue: Int {
+        return self.name?.hashValue ?? 0
+    }
+    
+    public static func ==(lhs: objc_method_description, rhs: objc_method_description) -> Bool{
+        return lhs.name == rhs.name
     }
 }

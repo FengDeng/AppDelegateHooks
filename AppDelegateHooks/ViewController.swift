@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     }
     
     @objc func clicked(){
-        //UIApplication.registAllApplicationHook
+
     }
 
     override func didReceiveMemoryWarning() {
