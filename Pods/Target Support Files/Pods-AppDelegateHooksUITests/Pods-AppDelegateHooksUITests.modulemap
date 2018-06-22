@@ -1,0 +1,6 @@
+framework module Pods_AppDelegateHooksUITests {
+  umbrella header "Pods-AppDelegateHooksUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
