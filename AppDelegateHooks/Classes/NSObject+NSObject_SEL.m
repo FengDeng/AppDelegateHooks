@@ -28,11 +28,12 @@
             id obj = objects[i]; [invocation setArgument:&obj atIndex:i+2];
         }
         [invocation invoke];
-        id callBackObject = nil;
-        if(methodSignature.methodReturnLength) {
-            [invocation getReturnValue:&callBackObject];
-        }
-        return callBackObject;
+//        id callBackObject = nil;
+//        if(methodSignature.methodReturnLength) {
+//            [invocation getReturnValue:&callBackObject];
+//        }
+//        return callBackObject;
+        return nil;
     }
 }
 @end
