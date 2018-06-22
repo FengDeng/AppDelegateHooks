@@ -15,10 +15,10 @@ class ExampleHook1: ApplicationHook {
         self.level = 10
     }
     
-//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
-//        print("ExampleHook1 didFinishLaunchingWithOptions")
-//        return true
-//    }
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
+        print("ExampleHook1 didFinishLaunchingWithOptions")
+        return false
+    }
     
     func applicationWillResignActive(_ application: UIApplication) {
         print("ExampleHook1 applicationWillResignActive")
@@ -41,7 +41,7 @@ class ExampleHook2: ApplicationHook {
         print("ExampleHook2 applicationWillResignActive")
     }
     
-    @objc dynamic func applicationDidBecomeActive(_ application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         print("ExampleHook2 applicationDidBecomeActive")
     }
     
