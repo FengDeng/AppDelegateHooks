@@ -3,12 +3,16 @@
 
 
 
+##Pod
+
+pod 'AppDelegateHooks', :git => "git@github.com:FengDeng/AppDelegateHooks.git",:branch=>"master"
+
 ##How to use
 
-pod 'AppDelegateHooks', :git => "",:branch=>"master"
+在子组件里面 添加如下
 
-class Module1 : ApplicationHook{
-  //添加你想要的
-}
+    class Module1 : ApplicationHook{
+      //添加你想要的生命周期
+    }
 
 没了。。
