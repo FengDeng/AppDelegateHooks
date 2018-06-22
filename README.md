@@ -3,16 +3,16 @@
 
 让每个组件都拥有AppDelegate的生命周期  感觉自己就在AppDelegate里面
 
-- 单个Class搞定一切
+- 单个Class搞定一切
 - 对主工程毫无侵入性
 - 原生的AppDelegate代码体验 提示
 
 
-##CocoaPods
+## CocoaPods
 
     pod 'AppDelegateHooks', :git => "git@github.com:FengDeng/AppDelegateHooks.git",:branch=>"master"
 
-##How to use
+## How to use
 
 在子组件里面 添加如下
 
@@ -32,8 +32,7 @@
       。。。。等等等
     }
 
-##Notice
-
+## Notice
 
     如果application的代理类名 不含有Delegate字符串  
     或者
