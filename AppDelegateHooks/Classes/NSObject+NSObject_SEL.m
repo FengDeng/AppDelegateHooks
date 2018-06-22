@@ -10,7 +10,6 @@
 #import <UIKit/UIKit.h>
 #import "NSObject+NSObject_SEL.h"
 #import <objc/runtime.h>
-#import "AppDelegateHooks-Swift.h"
 @implementation NSObject (Sel)
 
 - (id)performSelector:(SEL)aSelector withObjects:(NSArray *)objects{
