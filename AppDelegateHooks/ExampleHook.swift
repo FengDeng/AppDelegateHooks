@@ -23,6 +23,15 @@ class ExampleHook1: ApplicationHook {
     func applicationWillResignActive(_ application: UIApplication) {
         print("ExampleHook1 applicationWillResignActive")
     }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        print("ExampleHook1 applicationDidBecomeActive")
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        print("ExampleHook1 open url")
+        return false
+    }
 }
 
 class ExampleHook2: ApplicationHook {

@@ -13,9 +13,21 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        UIApplication.shared.open(URL.init(string: "www.baidu.com")!, options: [:]) { (com) in
-            print("www.baidu.com")
-        }
+       
+        //UIApplication.shared.canOpenURL(URL.init(string: "www.baidu.com")!)
+        
+        
+        let btn = UIButton.init()
+        btn.setTitle("Hook", for: .normal)
+        
+        btn.backgroundColor = UIColor.red
+        self.view.addSubview(btn)
+        btn.frame = CGRect.init(x: 100, y: 100, width: 100, height: 100)
+        btn.addTarget(self, action: #selector(clicked), for: UIControlEvents.touchUpInside)
+    }
+    
+    @objc func clicked(){
+        //UIApplication.registAllApplicationHook
     }
 
     override func didReceiveMemoryWarning() {

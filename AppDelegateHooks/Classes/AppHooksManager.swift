@@ -28,8 +28,6 @@ public class AppHooksManager{
     
     //保存所有的hook实例
     var hooks = [ApplicationHook]()
-    
-    //
     var hooksDic = [Selector : [ApplicationHook]]()
     func regist(hook:ApplicationHook){
         self.hooks.append(hook)
@@ -49,9 +47,7 @@ public class AppHooksManager{
                 for i in 0..<Int(methodCount) {
                     let methodDesc = methodList[i];
                     guard let name = methodDesc.name else {continue}
-                    //let types = methodDesc.types
-                    
-                    
+                    print("\n\n\n>>>>>>\(name)")
                     let wrappedBlock:@convention(block) (AspectInfo)-> Void = {aspectInfo in
                         if let hooks = self.hooksDic[name]{
                             for hook in hooks{
@@ -63,15 +59,21 @@ public class AppHooksManager{
                     }
                     //如果主工程的delegate实现了方法，则所有的hook都需要执行
                     if class_getInstanceMethod(application.classForCoder, name) != nil{
-                        print("-----hook \(String(describing: name))")
-                        self.hooksDic[name] = self.hooks
+                        print("---主工程实现了")
+                        self.hooksDic[name] = self.hooks.filter({ (hook) -> Bool in
+                            let isIMP = (class_getInstanceMethod(hook.classForCoder, name) != nil)
+                            print("---\(hook.classForCoder) 实现了")
+                            return isIMP
+                        })
                         try application.aspect_hook(name, with: AspectOptions.positionBefore, usingBlock: wrappedBlock)
                     }else{
                         //如果主工程的delegate没有实现方法
                         //找到实现了的hook
+                        print("---主工程没有实现")
                         var hooks = [ApplicationHook]()
                         for hook in self.hooks{
                             if class_getInstanceMethod(hook.classForCoder, name) != nil{
+                                print("---\(hook.classForCoder) 实现了")
                                 hooks.append(hook)
                             }
                         }
@@ -79,7 +81,7 @@ public class AppHooksManager{
                             //取出最后一个hook 动态添加到AppDelegate（因为我们等会hook的是before，为保证level，这里hook最后一个）
                             let hook = hooks.removeLast()
                             if let method = class_getInstanceMethod(hook.classForCoder, name){
-                                print("--dy-add-主工程未实现，动态添加 \(name)")
+                                print("---\(hook.classForCoder) 实现的方法动态添加到主工程")
                                 class_addMethod(application.classForCoder, name, method_getImplementation(method), method_getTypeEncoding(method))
                             }
                             
@@ -87,9 +89,9 @@ public class AppHooksManager{
                                 self.hooksDic[name] = hooks
                                 try application.aspect_hook(name, with: AspectOptions.positionBefore, usingBlock: wrappedBlock)
                             }
-                            print(application.classForCoder.instancesRespond(to: name))
-                            print((application as? UIApplicationDelegate)?.responds(to: name))
-                            print(application.responds(to: name))
+//                            print(application.classForCoder.instancesRespond(to: name))
+//                            print((application as? UIApplicationDelegate)?.responds(to: name))
+//                            print(application.responds(to: name))
 //                            print("手动调用下 \(name)")
 //                            application.perform(name, with: nil)
                         }
