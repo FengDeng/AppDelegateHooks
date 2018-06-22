@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "git@github.com:FengDeng/AppDelegateHooks.git", :tag => "#{s.version}" }
 
-  s.source_files  = "Classes", "Classes/*.{swift,h,m}"
+  s.source_files  = "AppDelegateHooks/Classes", "AppDelegateHooks/Classes/*.{swift,h,m}"
 
 
   s.dependency "Aspects"
