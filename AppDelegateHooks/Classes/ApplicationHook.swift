@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 
-open class ApplicationHook : NSObject, UIApplicationDelegate {
+open class ApplicationHookClass : NSObject{}
+open class ApplicationHook : ApplicationHookClass, UIApplicationDelegate {
     
     //bigger level called first
     open var level = 0

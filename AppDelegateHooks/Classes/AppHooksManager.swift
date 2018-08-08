@@ -226,7 +226,7 @@ extension AppHooksManager{
             }
         }
         for subclass in classes.1{
-            if NSStringFromClass(subclass).contains("Delegate"){
+            if !subclass.isSubclass(of: ApplicationHookClass.self){
                 AppHooksManager.default.mainProtocolClass = subclass
             }
         }
