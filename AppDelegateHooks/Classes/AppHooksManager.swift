@@ -10,6 +10,34 @@ import Foundation
 import UIKit
 import Aspects
 
+extension NSObject{
+    func perform2(_ selector : Selector,with args:[Any]){
+        let c = self.classForCoder
+        let method = class_getMethodImplementation(c, selector)
+        if args.count == 0{
+            typealias signature = @convention(c)(Any,Selector)->Void
+            let function = unsafeBitCast(method,to: signature.self)
+            function(self,selector)
+        }
+        if args.count == 1{
+            typealias signature = @convention(c)(Any,Selector,Any?)->Void
+            let function = unsafeBitCast(method,to: signature.self)
+            function(self,selector,(args[0] is NSNull) ? nil : args[0])
+        }
+        if args.count == 2{
+            typealias signature = @convention(c)(Any,Selector,Any?,Any?)->Void
+            let function = unsafeBitCast(method, to: signature.self)
+            function(self,selector,(args[0] is NSNull) ? nil : args[0],(args[1] is NSNull) ? nil : args[1])
+        }
+        if args.count == 3{
+            typealias signature = @convention(c)(Any,Selector,Any?,Any?,Any?)->Void
+            let function = unsafeBitCast(method, to: signature.self)
+            function(self,selector,(args[0] is NSNull) ? nil : args[0],(args[1] is NSNull) ? nil : args[1],(args[2] is NSNull) ? nil : args[2])
+        }
+        
+    }
+}
+
 extension UIApplication{
     private static let registAllApplicationHook:Void = {
         AppHooksManager.registAllApplicationHook()
@@ -62,7 +90,7 @@ public class AppHooksManager{
                     if let hooks = self.hooksDic[name]{
                         for hook in hooks{
                             if class_getInstanceMethod(hook.classForCoder, name) != nil{
-                                hook.perform(name, with: aspectInfo.arguments().filter({!($0 is NSNull)}))
+                                hook.perform2(name, with: aspectInfo.arguments())
                             }
                         }
                     }
