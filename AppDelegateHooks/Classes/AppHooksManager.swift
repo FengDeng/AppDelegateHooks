@@ -8,9 +8,11 @@
 
 import Foundation
 import UIKit
-import Aspect
+import Aspects
 
 //如果hook的方法需要有返回值的话，查看 https://github.com/steipete/Aspects
+
+typealias AspectsBlock = @convention(block) (AspectInfo) -> Void
 
 public class AppHooksManager{
     public static let `default` = AppHooksManager()
@@ -38,11 +40,11 @@ public class AppHooksManager{
             guard let name = method.name else {continue}
             
             /// 构造 Block
-            let wrappedBlock:AspectBlock = {aspectInfo in
+            let wrappedBlock:AspectsBlock = {aspectInfo in
                 if let hooks = self.hooksDic[name]{
                     for hook in hooks{
                         if class_getInstanceMethod(hook.classForCoder, name) != nil{
-                            hook.perform2(name, with: aspectInfo.arguments)
+                            hook.perform_hooks(name, with: aspectInfo.arguments())
                         }
                     }
                 }
@@ -53,7 +55,7 @@ public class AppHooksManager{
                 self.hooksDic[name] = self.hooks.filter({ (hook) -> Bool in
                     return class_getInstanceMethod(hook.classForCoder, name) != nil
                 })
-                _ = application.hook(name, position: AspectPosition.before, usingBlock: wrappedBlock)
+                _ = try? application.aspect_hook(name, with: AspectOptions.positionBefore, usingBlock: wrappedBlock)
             }else{
                 //如果主工程的delegate没有实现方法
                 //找到实现了的hook
@@ -72,7 +74,7 @@ public class AppHooksManager{
                     
                     if hooks.count > 0{
                         self.hooksDic[name] = hooks
-                        _ = application.hook(name, position: AspectPosition.before, usingBlock: wrappedBlock)
+                        _ = try? application.aspect_hook(name, with: AspectOptions.positionBefore, usingBlock: wrappedBlock)
                     }
                 }
             }
@@ -220,7 +222,7 @@ extension objc_method_description : Equatable,Hashable{
 }
 
 extension NSObject{
-    func perform2(_ selector : Selector,with args:[Any]){
+    func perform_hooks(_ selector : Selector,with args:[Any]){
         let cls :AnyClass = self.classForCoder
         let method = class_getMethodImplementation(cls, selector)
         if args.count == 0{
@@ -243,7 +245,16 @@ extension NSObject{
             let function = unsafeBitCast(method, to: signature.self)
             function(self,selector,(args[0] is NSNull) ? nil : args[0],(args[1] is NSNull) ? nil : args[1],(args[2] is NSNull) ? nil : args[2])
         }
-        
+        if args.count == 4{
+            typealias signature = @convention(c)(Any,Selector,Any?,Any?,Any?,Any?)->Void
+            let function = unsafeBitCast(method, to: signature.self)
+            function(self,selector,(args[0] is NSNull) ? nil : args[0],(args[1] is NSNull) ? nil : args[1],(args[2] is NSNull) ? nil : args[2],(args[3] is NSNull) ? nil : args[3])
+        }
+        if args.count == 5{
+            typealias signature = @convention(c)(Any,Selector,Any?,Any?,Any?,Any?,Any?)->Void
+            let function = unsafeBitCast(method, to: signature.self)
+            function(self,selector,(args[0] is NSNull) ? nil : args[0],(args[1] is NSNull) ? nil : args[1],(args[2] is NSNull) ? nil : args[2],(args[3] is NSNull) ? nil : args[3],(args[4] is NSNull) ? nil : args[4])
+        }
     }
 }
 

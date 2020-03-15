@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Aspect
+import Aspects
 
 @objc protocol TestPro : NSObjectProtocol {
     @objc optional

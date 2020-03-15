@@ -28,6 +28,6 @@ Pod::Spec.new do |s|
   s.source_files  = "AppDelegateHooks/Classes", "AppDelegateHooks/Classes/*.{swift,m}"
 
 
-  s.dependency "Aspect",'~>1.3.5'
+  s.dependency 'Aspects','~>1.4.1'
 
 end
