@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-class ExampleHook1: ApplicationHook {
+class ExampleHook1: AppDelegateHook {
     
     required init() {
         super.init()
@@ -17,7 +17,7 @@ class ExampleHook1: ApplicationHook {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
         print("ExampleHook1 didFinishLaunchingWithOptions")
-        return false
+        return true
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -34,7 +34,7 @@ class ExampleHook1: ApplicationHook {
     }
 }
 
-class ExampleHook2: ApplicationHook {
+class ExampleHook2: AppDelegateHook {
     
     required init() {
         super.init()
@@ -44,7 +44,7 @@ class ExampleHook2: ApplicationHook {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
         print("ExampleHook2 didFinishLaunchingWithOptions")
-        return false
+        return true
     }
     func applicationWillResignActive(_ application: UIApplication) {
         print("ExampleHook2 applicationWillResignActive")
@@ -60,3 +60,31 @@ class ExampleHook2: ApplicationHook {
     }
     
 }
+
+class ExampleHook3: AppDelegateHook {
+    
+    required init() {
+        super.init()
+        self.level = 500
+    }
+
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
+        print("ExampleHook3 didFinishLaunchingWithOptions")
+        return true
+    }
+    func applicationWillResignActive(_ application: UIApplication) {
+        print("ExampleHook3 applicationWillResignActive")
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        print("ExampleHook3 applicationDidBecomeActive")
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        print("ExampleHook3 open url")
+        return false
+    }
+    
+}
+

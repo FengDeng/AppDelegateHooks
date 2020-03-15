@@ -1,16 +1,16 @@
 PODS:
-  - Aspects (1.4.1)
+  - Aspect (1.3.5)
 
 DEPENDENCIES:
-  - Aspects
+  - Aspect
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - Aspects
+  trunk:
+    - Aspect
 
 SPEC CHECKSUMS:
-  Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
+  Aspect: 65abb3b49d24e8e8452bbf8ee988012c18eff61e
 
-PODFILE CHECKSUM: c42983e168831bbfa821e29d6b46d5954087f5f1
+PODFILE CHECKSUM: 6ab6e528f41557d16eae122be6910307e52d41c1
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.9.1

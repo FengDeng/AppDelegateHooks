@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,11 +16,12 @@
 		9F58BDE320DC9E66006B04BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F58BDE120DC9E66006B04BD /* LaunchScreen.storyboard */; };
 		9F58BDEE20DC9E66006B04BD /* AppDelegateHooksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F58BDED20DC9E66006B04BD /* AppDelegateHooksTests.swift */; };
 		9F58BDF920DC9E66006B04BD /* AppDelegateHooksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F58BDF820DC9E66006B04BD /* AppDelegateHooksUITests.swift */; };
-		9F58BE0E20DC9EB8006B04BD /* AppHooksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F58BE0A20DC9EB8006B04BD /* AppHooksManager.swift */; };
-		9F58BE0F20DC9EB8006B04BD /* NSObject+NSObject_SEL.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F58BE0C20DC9EB8006B04BD /* NSObject+NSObject_SEL.m */; };
-		9F58BE1020DC9EB8006B04BD /* ApplicationHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F58BE0D20DC9EB8006B04BD /* ApplicationHook.swift */; };
 		9F58BE1220DC9F30006B04BD /* ExampleHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F58BE1120DC9F30006B04BD /* ExampleHook.swift */; };
 		9F58BE1420DCA245006B04BD /* TestDeleagte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F58BE1320DCA245006B04BD /* TestDeleagte.swift */; };
+		9F5C487F241E666600DB5B21 /* AppHooksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5C487B241E666600DB5B21 /* AppHooksManager.swift */; };
+		9F5C4880241E666600DB5B21 /* UIApplication+Load.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5C487C241E666600DB5B21 /* UIApplication+Load.m */; };
+		9F5C4881241E666600DB5B21 /* UIApplication+Load.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5C487D241E666600DB5B21 /* UIApplication+Load.swift */; };
+		9F5C4882241E666600DB5B21 /* AppDelegateHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5C487E241E666600DB5B21 /* AppDelegateHook.swift */; };
 		C36B511BD34915F3A0BDF5BB /* Pods_AppDelegateHooks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D40CFF28BCB30A60A32A4E /* Pods_AppDelegateHooks.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,13 +59,12 @@
 		9F58BDF420DC9E66006B04BD /* AppDelegateHooksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppDelegateHooksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F58BDF820DC9E66006B04BD /* AppDelegateHooksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateHooksUITests.swift; sourceTree = "<group>"; };
 		9F58BDFA20DC9E66006B04BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9F58BE0720DC9E8D006B04BD /* AppDelegateHooks-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegateHooks-Bridging-Header.h"; sourceTree = "<group>"; };
-		9F58BE0A20DC9EB8006B04BD /* AppHooksManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppHooksManager.swift; sourceTree = "<group>"; };
-		9F58BE0B20DC9EB8006B04BD /* NSObject+NSObject_SEL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+NSObject_SEL.h"; sourceTree = "<group>"; };
-		9F58BE0C20DC9EB8006B04BD /* NSObject+NSObject_SEL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+NSObject_SEL.m"; sourceTree = "<group>"; };
-		9F58BE0D20DC9EB8006B04BD /* ApplicationHook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationHook.swift; sourceTree = "<group>"; };
 		9F58BE1120DC9F30006B04BD /* ExampleHook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleHook.swift; sourceTree = "<group>"; };
 		9F58BE1320DCA245006B04BD /* TestDeleagte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDeleagte.swift; sourceTree = "<group>"; };
+		9F5C487B241E666600DB5B21 /* AppHooksManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppHooksManager.swift; sourceTree = "<group>"; };
+		9F5C487C241E666600DB5B21 /* UIApplication+Load.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+Load.m"; sourceTree = "<group>"; };
+		9F5C487D241E666600DB5B21 /* UIApplication+Load.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Load.swift"; sourceTree = "<group>"; };
+		9F5C487E241E666600DB5B21 /* AppDelegateHook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateHook.swift; sourceTree = "<group>"; };
 		AA9D6CF265C821ADE11AECBD /* Pods-AppDelegateHooksUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppDelegateHooksUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppDelegateHooksUITests/Pods-AppDelegateHooksUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B4B250AF949E96D1CF28C896 /* Pods-AppDelegateHooks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppDelegateHooks.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppDelegateHooks/Pods-AppDelegateHooks.debug.xcconfig"; sourceTree = "<group>"; };
 		CAF2733E0F0724EF20B20C91 /* Pods-AppDelegateHooksTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppDelegateHooksTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppDelegateHooksTests/Pods-AppDelegateHooksTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -170,11 +170,10 @@
 		9F58BE0620DC9E79006B04BD /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				9F58BE0A20DC9EB8006B04BD /* AppHooksManager.swift */,
-				9F58BE0D20DC9EB8006B04BD /* ApplicationHook.swift */,
-				9F58BE0B20DC9EB8006B04BD /* NSObject+NSObject_SEL.h */,
-				9F58BE0C20DC9EB8006B04BD /* NSObject+NSObject_SEL.m */,
-				9F58BE0720DC9E8D006B04BD /* AppDelegateHooks-Bridging-Header.h */,
+				9F5C487E241E666600DB5B21 /* AppDelegateHook.swift */,
+				9F5C487B241E666600DB5B21 /* AppHooksManager.swift */,
+				9F5C487C241E666600DB5B21 /* UIApplication+Load.m */,
+				9F5C487D241E666600DB5B21 /* UIApplication+Load.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -365,17 +364,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-AppDelegateHooks/Pods-AppDelegateHooks-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Aspects/Aspects.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AppDelegateHooks/Pods-AppDelegateHooks-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Aspects.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AppDelegateHooks/Pods-AppDelegateHooks-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AppDelegateHooks/Pods-AppDelegateHooks-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AppDelegateHooks/Pods-AppDelegateHooks-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FB7B1D038F3160FFBA6C6044 /* [CP] Check Pods Manifest.lock */ = {
@@ -404,12 +402,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F58BE1420DCA245006B04BD /* TestDeleagte.swift in Sources */,
-				9F58BE0F20DC9EB8006B04BD /* NSObject+NSObject_SEL.m in Sources */,
 				9F58BDDB20DC9E64006B04BD /* ViewController.swift in Sources */,
+				9F5C4880241E666600DB5B21 /* UIApplication+Load.m in Sources */,
+				9F5C487F241E666600DB5B21 /* AppHooksManager.swift in Sources */,
+				9F5C4881241E666600DB5B21 /* UIApplication+Load.swift in Sources */,
+				9F5C4882241E666600DB5B21 /* AppDelegateHook.swift in Sources */,
 				9F58BDD920DC9E64006B04BD /* AppDelegate.swift in Sources */,
 				9F58BE1220DC9F30006B04BD /* ExampleHook.swift in Sources */,
-				9F58BE1020DC9EB8006B04BD /* ApplicationHook.swift in Sources */,
-				9F58BE0E20DC9EB8006B04BD /* AppHooksManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,7 +592,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiangzhen.AppDelegateHooks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "AppDelegateHooks/Classes/AppDelegateHooks-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -615,7 +614,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiangzhen.AppDelegateHooks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "AppDelegateHooks/Classes/AppDelegateHooks-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
