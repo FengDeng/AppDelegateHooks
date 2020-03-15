@@ -30,11 +30,11 @@ github "FengDeng/AppDelegateHooks" ~> 0.0.1
     
 ### ~~SPM~~
 
-~~```swift
+```swift
 dependencies: [
     .package(url: "https://github.com/FengDeng/AppDelegateHooks", from: "0.0.1")
 ]
-```~~
+```
 
 
 ## Usage
@@ -138,7 +138,7 @@ github "FengDeng/AppDelegateHooks" ~> 0.0.1
 dependencies: [
     .package(url: "https://github.com/FengDeng/AppDelegateHooks", from: "0.0.1")
 ]
-```~~
+```
     
 ## 使用
 
