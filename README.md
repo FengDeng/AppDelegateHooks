@@ -3,7 +3,9 @@
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/AppDelegateHooks.svg)](https://img.shields.io/cocoapods/v/AppDelegateHooks.svg)
 [![Platform](https://img.shields.io/cocoapods/p/AppDelegateHooks.svg?style=flat)](https://alamofire.github.io/Alamofire)
 
-AppDelegateHooks 一个可以轻松拦截AppDelegate所有回调的轻量级的库。
+AppDelegateHooks： 一个可以轻松拦截AppDelegate所有回调的轻量级的库。
+
+AppDelegateHooks: easy hook AppDelegate methods library.
 
 ## 特性
 
@@ -12,13 +14,20 @@ AppDelegateHooks 一个可以轻松拦截AppDelegate所有回调的轻量级的�
 - [x] 提供重写level，自定义调用优先级
 - [x] 组件内，模块内，无限制hook主工程生命周期
 
+
+- [x] Native UIApplicationDelegate code prompt
+- [x] Just new class inhert AppDelegateHook
+- [x] Rewrite level property,Custom calling sequence
+- [x] Create class everywhere
+
 ## CocoaPods
 
     pod 'AppDelegateHooks'
 
-## 使用
+## 使用   How To Use
 
 主工程：
+main project:
 
     class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -32,6 +41,7 @@ AppDelegateHooks 一个可以轻松拦截AppDelegate所有回调的轻量级的�
 }
 
 在子组件里面 添加如下
+sub framework or kit:
 
     class ExampleHook1 : AppDelegateHook{
       //添加你想要的生命周期
@@ -64,6 +74,7 @@ AppDelegateHooks 一个可以轻松拦截AppDelegate所有回调的轻量级的�
     }
     
 输出：
+print:
     
     ExampleHook2 didFinishLaunchingWithOptions
     ExampleHook1 didFinishLaunchingWithOptions
