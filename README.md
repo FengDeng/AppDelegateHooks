@@ -28,13 +28,13 @@ pod 'AppDelegateHooks', '~> 0.0.1'
 github "FengDeng/AppDelegateHooks" ~> 0.0.1
 ```
     
-### SPM
+### ~~SPM~~
 
-```swift
+~~```swift
 dependencies: [
     .package(url: "https://github.com/FengDeng/AppDelegateHooks", from: "0.0.1")
 ]
-```
+```~~
 
 
 ## Usage
@@ -132,13 +132,13 @@ pod 'AppDelegateHooks', '~> 0.0.1'
 github "FengDeng/AppDelegateHooks" ~> 0.0.1
 ```
     
-### SPM
+### ~~SPM~~
 
-```swift
+~~```swift
 dependencies: [
     .package(url: "https://github.com/FengDeng/AppDelegateHooks", from: "0.0.1")
 ]
-```
+```~~
     
 ## 使用
 
