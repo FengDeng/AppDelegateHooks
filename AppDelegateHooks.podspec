@@ -21,9 +21,11 @@ Pod::Spec.new do |s|
   s.author             = { "邓锋" => "704292743@qq.com" }
 
   s.platform     = :ios, "8.0"
+  s.ios.deployment_target = '8.0'
 
-  s.source       = { :git => "git@github.com:FengDeng/AppDelegateHooks.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/FengDeng/AppDelegateHooks.git", :tag => "#{s.version}" }
 
+  s.module_name = 'AppDelegateHooks'
   s.swift_version = "5.0"
   s.source_files  = "AppDelegateHooks/Classes", "AppDelegateHooks/Classes/*.{swift,m}"
 
