@@ -64,7 +64,7 @@ class ExampleHook1 : AppDelegateHook{
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
     print("ExampleHook1 didFinishLaunchingWithOptions")
-    return false
+    return true
   }
   func applicationWillResignActive(_ application: UIApplication) {
     print("ExampleHook1 applicationWillResignActive")
@@ -81,7 +81,7 @@ class ExampleHook2 : AppDelegateHook{
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
     print("ExampleHook2 didFinishLaunchingWithOptions")
-    return false
+    return true
   }
   func applicationWillResignActive(_ application: UIApplication) {
     print("ExampleHook2 applicationWillResignActive")
@@ -151,7 +151,7 @@ class ExampleHook1 : AppDelegateHook{
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
     print("ExampleHook1 didFinishLaunchingWithOptions")
-    return false
+    return true
   }
   func applicationWillResignActive(_ application: UIApplication) {
     print("ExampleHook1 applicationWillResignActive")
@@ -168,7 +168,7 @@ class ExampleHook2 : AppDelegateHook{
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
     print("ExampleHook2 didFinishLaunchingWithOptions")
-    return false
+    return true
   }
   func applicationWillResignActive(_ application: UIApplication) {
     print("ExampleHook2 applicationWillResignActive")
