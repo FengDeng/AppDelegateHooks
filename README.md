@@ -4,7 +4,7 @@
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Platform](https://img.shields.io/cocoapods/p/AppDelegateHooks.svg?style=flat)](https://github.com/FengDeng/AppDelegateHooks)
 
-AppDelegateHooks: easy hook AppDelegate methods library.
+AppDelegateHooks: easy library to  hook AppDelegate methods ,distributed your UIApplicationDelegate code in every component.
 
 
 ## Features
@@ -109,7 +109,7 @@ Thanks for [Aspects](https://github.com/steipete/Aspects) which developed by [@s
 
 # 中文
 
-AppDelegateHooks： 一个可以轻松拦截AppDelegate所有回调的轻量级的库。
+AppDelegateHooks： 一个可以轻松拦截AppDelegate所有回调的轻量级的库,把你的初始化代码分散到各个组件内部。
 
 ## 特性
 
