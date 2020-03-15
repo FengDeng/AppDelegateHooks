@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
 
   s.name         = "AppDelegateHooks"
-  s.version      = "0.0.2"
+  s.version      = "0.0.1"
   s.summary      = "Hook AppDelegate"
 
 
@@ -24,10 +24,10 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "git@github.com:FengDeng/AppDelegateHooks.git", :tag => "#{s.version}" }
 
-  s.swift_version = "4.1"
-  s.source_files  = "AppDelegateHooks/Classes", "AppDelegateHooks/Classes/*.{swift,h,m}"
+  s.swift_version = "5.0"
+  s.source_files  = "AppDelegateHooks/Classes", "AppDelegateHooks/Classes/*.{swift,m}"
 
 
-  s.dependency "Aspects"
+  s.dependency "Aspect"
 
 end
