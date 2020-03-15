@@ -102,7 +102,9 @@ print:
     ExampleHook1 applicationWillResignActive
 
 
-## 
+## Thanks
+
+Thanks for [Aspects](https://github.com/steipete/Aspects) which developed by [@steipete](http://twitter.com/steipete) in GitHub
 
 
 # 中文
