@@ -1,25 +1,56 @@
 # AppDelegateHooks
 
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/AppDelegateHooks.svg)](https://img.shields.io/cocoapods/v/AppDelegateHooks.svg)
+[![Platform](https://img.shields.io/cocoapods/p/AppDelegateHooks.svg?style=flat)](https://alamofire.github.io/Alamofire)
 
-让每个组件都拥有AppDelegate的生命周期  感觉自己就在AppDelegate里面
+AppDelegateHooks 一个可以轻松拦截AppDelegate所有回调的轻量级的库。
 
-- 单个Class搞定一切
-- 对主工程毫无侵入性
-- 原生的AppDelegate代码体验 提示
+## 特性
 
+- [x] 原生的UIApplicationDelegate代码提示
+- [x] 新建Class，继承AppDelegateHook即可，无需其他操作
+- [x] 提供重写level，自定义调用优先级
+- [x] 组件内，模块内，无限制hook主工程生命周期
 
 ## CocoaPods
 
-    pod 'AppDelegateHooks', :git => "git@github.com:FengDeng/AppDelegateHooks.git",:branch=>"master"
+    pod 'AppDelegateHooks'
 
-## How to use
+## 使用
+
+主工程：
+
+    class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    var window: UIWindow?
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        print("Main didFinishLaunchingWithOptions")
+        return true
+    }
+
+}
 
 在子组件里面 添加如下
 
-    class XXXClass : ApplicationHook{
+    class ExampleHook1 : AppDelegateHook{
       //添加你想要的生命周期
-
       self.level = 1000//如果你这个组件想要最先加载 level越大越先
+
+      func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
+        print("ExampleHook1 didFinishLaunchingWithOptions")
+        return false
+      }
+      func applicationWillResignActive(_ application: UIApplication) {
+        print("ExampleHook1 applicationWillResignActive")
+      }
+
+      ......
+    }
+    
+    class ExampleHook2 : AppDelegateHook{
+      //添加你想要的生命周期
+      self.level = 10000//如果你这个组件想要最先加载 level越大越先
 
       func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
         print("ExampleHook2 didFinishLaunchingWithOptions")
@@ -29,15 +60,19 @@
         print("ExampleHook2 applicationWillResignActive")
       }
 
-      。。。。等等等
+      ......
     }
+    
+输出：
+    
+    ExampleHook2 didFinishLaunchingWithOptions
+    ExampleHook1 didFinishLaunchingWithOptions
+    Main didFinishLaunchingWithOptions
+    ExampleHook2 applicationWillResignActive
+    ExampleHook1 applicationWillResignActive
 
-## Notice
 
-    如果application的代理类名 不含有Delegate字符串  
-    或者
-    有多个含有Delegate字符串并且实现了UIApplicationDelegate协议的类 
-    会有问题
+
 
 
 
