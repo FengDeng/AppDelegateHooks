@@ -1,6 +1,7 @@
 # AppDelegateHooks  
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/AppDelegateHooks.svg)](https://img.shields.io/cocoapods/v/AppDelegateHooks.svg)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Platform](https://img.shields.io/cocoapods/p/AppDelegateHooks.svg?style=flat)](https://alamofire.github.io/Alamofire)
 
 AppDelegateHooks: easy hook AppDelegate methods library.
@@ -17,78 +18,78 @@ AppDelegateHooks: easy hook AppDelegate methods library.
 
 ### Cocoapods
 
-    ```ruby
-    pod 'AppDelegateHooks', '~> 0.0.1'
-    ```
+```ruby
+pod 'AppDelegateHooks', '~> 0.0.1'
+```
     
 ### Carthage
 
-    ```ogdl
-    github "FengDeng/AppDelegateHooks" ~> 0.0.1
-    ```
+```ogdl
+github "FengDeng/AppDelegateHooks" ~> 0.0.1
+```
     
 ### SPM
 
-    ```swift
-    dependencies: [
-        .package(url: "https://github.com/FengDeng/AppDelegateHooks", from: "0.0.1")
-    ]
-    ```
+```swift
+dependencies: [
+    .package(url: "https://github.com/FengDeng/AppDelegateHooks", from: "0.0.1")
+]
+```
 
 
 ## Usage
 
 sample in main project:
 
-   ```swift
-    class AppDelegate: UIResponder, UIApplicationDelegate {
+```swift
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
-        var window: UIWindow?
+    var window: UIWindow?
 
-        func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-            print("Main didFinishLaunchingWithOptions")
-            return true
-        }
-
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        print("Main didFinishLaunchingWithOptions")
+        return true
     }
-   ```
+
+}
+```
 
 
 in your workspace or framework:
 
-    ```swift
-    class ExampleHook1 : AppDelegateHook{
-      //添加你想要的生命周期
-      self.level = 1000//如果你这个组件想要最先加载 level越大越先
+```swift
+class ExampleHook1 : AppDelegateHook{
+  //添加你想要的生命周期
+  self.level = 1000//如果你这个组件想要最先加载 level越大越先
 
-      func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
-        print("ExampleHook1 didFinishLaunchingWithOptions")
-        return false
-      }
-      func applicationWillResignActive(_ application: UIApplication) {
-        print("ExampleHook1 applicationWillResignActive")
-      }
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
+    print("ExampleHook1 didFinishLaunchingWithOptions")
+    return false
+  }
+  func applicationWillResignActive(_ application: UIApplication) {
+    print("ExampleHook1 applicationWillResignActive")
+  }
 
-      ......
-    }
-    ```
+  ......
+}
+```
     
-    ```swift
-    class ExampleHook2 : AppDelegateHook{
-      //添加你想要的生命周期
-      self.level = 10000//如果你这个组件想要最先加载 level越大越先
+```swift
+class ExampleHook2 : AppDelegateHook{
+  //添加你想要的生命周期
+  self.level = 10000//如果你这个组件想要最先加载 level越大越先
 
-      func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
-        print("ExampleHook2 didFinishLaunchingWithOptions")
-        return false
-      }
-      func applicationWillResignActive(_ application: UIApplication) {
-        print("ExampleHook2 applicationWillResignActive")
-      }
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
+    print("ExampleHook2 didFinishLaunchingWithOptions")
+    return false
+  }
+  func applicationWillResignActive(_ application: UIApplication) {
+    print("ExampleHook2 applicationWillResignActive")
+  }
 
-      ......
-    }
-    ```
+  ......
+}
+```
     
     
 print:
@@ -119,61 +120,61 @@ AppDelegateHooks： 一个可以轻松拦截AppDelegate所有回调的轻量级�
 
  ### Cocoapods
 
-    ```ruby
-    pod 'AppDelegateHooks', '~> 0.0.1'
-    ```
+```ruby
+pod 'AppDelegateHooks', '~> 0.0.1'
+```
     
 ### Carthage
 
-    ```ogdl
-    github "FengDeng/AppDelegateHooks" ~> 0.0.1
-    ```
+```ogdl
+github "FengDeng/AppDelegateHooks" ~> 0.0.1
+```
     
 ### SPM
 
-    ```swift
-    dependencies: [
-        .package(url: "https://github.com/FengDeng/AppDelegateHooks", from: "0.0.1")
-    ]
-    ```
+```swift
+dependencies: [
+    .package(url: "https://github.com/FengDeng/AppDelegateHooks", from: "0.0.1")
+]
+```
     
 ## 使用
 
 在子组件或者模块内新建文件
 
 ```swift
-    class ExampleHook1 : AppDelegateHook{
-      //添加你想要的生命周期
-      self.level = 1000//如果你这个组件想要最先加载 level越大越先
+class ExampleHook1 : AppDelegateHook{
+  //添加你想要的生命周期
+  self.level = 1000//如果你这个组件想要最先加载 level越大越先
 
-      func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
-        print("ExampleHook1 didFinishLaunchingWithOptions")
-        return false
-      }
-      func applicationWillResignActive(_ application: UIApplication) {
-        print("ExampleHook1 applicationWillResignActive")
-      }
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
+    print("ExampleHook1 didFinishLaunchingWithOptions")
+    return false
+  }
+  func applicationWillResignActive(_ application: UIApplication) {
+    print("ExampleHook1 applicationWillResignActive")
+  }
 
-      ......
-    }
-    ```
+  ......
+}
+```
     
-    ```swift
-    class ExampleHook2 : AppDelegateHook{
-      //添加你想要的生命周期
-      self.level = 10000//如果你这个组件想要最先加载 level越大越先
+```swift
+class ExampleHook2 : AppDelegateHook{
+  //添加你想要的生命周期
+  self.level = 10000//如果你这个组件想要最先加载 level越大越先
 
-      func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
-        print("ExampleHook2 didFinishLaunchingWithOptions")
-        return false
-      }
-      func applicationWillResignActive(_ application: UIApplication) {
-        print("ExampleHook2 applicationWillResignActive")
-      }
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
+    print("ExampleHook2 didFinishLaunchingWithOptions")
+    return false
+  }
+  func applicationWillResignActive(_ application: UIApplication) {
+    print("ExampleHook2 applicationWillResignActive")
+  }
 
-      ......
-    }
-    ```
+  ......
+}
+```
     
 打印如下：
 
