@@ -2,7 +2,7 @@
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/AppDelegateHooks.svg)](https://img.shields.io/cocoapods/v/AppDelegateHooks.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Platform](https://img.shields.io/cocoapods/p/AppDelegateHooks.svg?style=flat)](https://alamofire.github.io/Alamofire)
+[![Platform](https://img.shields.io/cocoapods/p/AppDelegateHooks.svg?style=flat)](https://github.com/FengDeng/AppDelegateHooks)
 
 AppDelegateHooks: easy hook AppDelegate methods library.
 
@@ -12,7 +12,7 @@ AppDelegateHooks: easy hook AppDelegate methods library.
 - [x] Native UIApplicationDelegate code prompt
 - [x] Just new class inhert AppDelegateHook
 - [x] Rewrite level property,Custom calling sequence
-- [x] Create class everywhere
+- [x] Hooks everywhere
 
 ## Installation
 
